@@ -15,14 +15,15 @@
   --transition:.3s ease; --radius:8px; --radius-lg:12px;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}
-html,body{width:100%;height:100%;overflow:hidden;font-family:"STSong","SimSun","宋体",serif;background:var(--bg);color:var(--surface);touch-action:manipulation}
-.screen{position:fixed;top:0;left:0;width:100%;height:100%;display:none;overflow:auto}
+html,body{width:100%;min-height:100%;overflow-x:hidden;font-family:"STSong","SimSun","宋体",serif;background:var(--bg);color:var(--surface);touch-action:manipulation;-webkit-overflow-scrolling:touch}
+body{margin:0;padding:0}
+.screen{position:fixed;top:0;left:0;width:100%;height:100%;display:none;overflow:auto;-webkit-overflow-scrolling:touch}
 .screen.active{display:block}
 
-#screen-loading{background:var(--bg)}
+#screen-loading{background:var(--bg);overflow:hidden}
 .loading-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.35;filter:sepia(.3)}
 .loading-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,10,10,.6),rgba(26,10,10,.9))}
-.loading-content{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2}
+.loading-content{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2}
 .loading-title{font-family:"STKaiti","KaiTi","楷体",serif;font-size:72px;color:var(--accent);text-shadow:0 0 30px rgba(200,163,82,.5);letter-spacing:.3em;margin-bottom:.3em;animation:titleGlow 2s ease-in-out infinite alternate}
 .loading-subtitle{font-size:18px;color:var(--surface);opacity:.7;letter-spacing:.5em;margin-bottom:2em}
 .loading-bar{width:300px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;margin-bottom:1em}
@@ -30,7 +31,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:"STSong","SimSun","
 .loading-hint{font-size:13px;color:var(--muted)}
 @keyframes titleGlow{from{text-shadow:0 0 20px rgba(200,163,82,.3)}to{text-shadow:0 0 40px rgba(200,163,82,.7)}}
 
-#screen-hub{background:#1a0a0a;position:relative;overflow:hidden}
+#screen-hub{background:#1a0a0a;position:relative;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 .hub-header{text-align:center;padding:40px 20px 20px;position:relative;z-index:2}
 .hub-title{font-family:"STKaiti","KaiTi",serif;font-size:48px;color:var(--accent);letter-spacing:.2em;margin-bottom:8px}
 .hub-subtitle{font-size:14px;color:var(--muted);margin-top:8px;letter-spacing:.3em;opacity:.7}
@@ -163,10 +164,11 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:"STSong","SimSun","
 .judgment-progress-bar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;margin-top:8px}
 .judgment-progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s}
 
-#screen-garden{background:#0a0505}
-.garden-layout{display:flex;height:calc(100% - 52px)}
-.garden-canvas-wrap{flex:1;position:relative;display:flex;align-items:center;justify-content:center;background:#0a0808;overflow:hidden}
-#garden-canvas{display:block;cursor:pointer;image-rendering:pixelated;image-rendering:crisp-edges}
+#screen-garden{background:#0a0505;overflow:hidden;touch-action:none}
+.garden-layout{display:flex;height:100vh;height:calc(var(--vh,1vh)*100);flex-direction:column}
+.stardew-top-bar{flex-shrink:0}
+.garden-canvas-wrap{flex:1;position:relative;display:flex;align-items:center;justify-content:center;background:#0a0808;overflow:hidden;min-height:0}
+#garden-canvas{display:block;cursor:pointer;image-rendering:pixelated;image-rendering:crisp-edges;max-width:100%;max-height:100%}
 .dialogue-overlay{position:absolute;bottom:15px;left:15px;right:15px;max-width:600px;margin:0 auto;background:linear-gradient(135deg,rgba(245,230,211,.97),rgba(237,224,208,.97));border:2px solid var(--accent);border-radius:10px;padding:15px 20px;display:none;gap:15px;box-shadow:0 4px 20px rgba(0,0,0,.6);z-index:10;backdrop-filter:blur(5px)}
 .dialogue-overlay.show{display:flex}
 .dialogue-portrait{width:56px;height:56px;border-radius:8px;flex-shrink:0;border:2px solid var(--accent);overflow:hidden}
@@ -942,8 +944,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:"STSong","SimSun","
   .minimap.expanded .minimap-legend{display:flex}
 
   /* 花园布局 - 画布占满 */
-  .garden-layout{height:100%;flex-direction:column}
-  .garden-canvas-wrap{width:100%;height:100%}
+  .garden-layout{height:100vh;height:calc(var(--vh,1vh)*100);flex-direction:column}
+  .garden-canvas-wrap{width:100%;flex:1;min-height:0}
   #garden-canvas{max-width:100%;max-height:100%;object-fit:contain}
 
   /* 互动提示 */
@@ -16777,6 +16779,15 @@ var mobileUI = {
 window.addEventListener('error',function(e){
   console.error('Game Error:',e.message,'at',e.filename+':'+e.lineno);
 });
+// 修复移动端100vh问题（浏览器地址栏导致高度不准）
+function fixVH(){
+  var vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', vh + 'px');
+}
+fixVH();
+window.addEventListener('resize', fixVH);
+window.addEventListener('orientationchange', function(){ setTimeout(fixVH, 100); });
+
 window.addEventListener('load',function(){
   try{initLoading();}catch(e){console.error('Loading error:',e);showScreen('hub');}
   try{poetryGame.init();}catch(e){console.error('Poetry init error:',e);}
@@ -16787,6 +16798,9 @@ window.addEventListener('load',function(){
   try{hotbarSystem.init();}catch(e){console.error('Hotbar init error:',e);}
   // 初始化移动端响应式UI
   try{mobileUI.init();}catch(e){console.error('Mobile UI init error:',e);}
+  // 再次修正高度
+  setTimeout(fixVH, 300);
+  setTimeout(fixVH, 1000);
 });
 </script>
 </body>
