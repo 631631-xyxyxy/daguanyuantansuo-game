@@ -8396,6 +8396,14 @@ var garden={
     // 水域减速
     var inWaterNow=this.isInWater(this.player.x,this.player.y);
     var sp=inWaterNow?baseSp*0.45:baseSp;
+    // 移动端速度加成（摇杆控制）
+    if(typeof mobileUI !== 'undefined' && mobileUI.isMobile && mobileUI.joystickActive){
+      sp *= 1.6;
+      // 根据摇杆推动距离调整速度（推得越远越快）
+      if(mobileUI.joystickIntensity !== undefined){
+        sp *= (0.5 + 0.5 * mobileUI.joystickIntensity);
+      }
+    }
     if(this.keys['w']||this.keys['arrowup']){dy-=sp;this.player.dir='up';}
     if(this.keys['s']||this.keys['arrowdown']){dy+=sp;this.player.dir='down';}
     if(this.keys['a']||this.keys['arrowleft']){dx-=sp;this.player.dir='left';}
@@ -16557,15 +16565,24 @@ var mobileUI = {
 
       knobEl.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
 
-      // 设置方向键（死区）
+      // 计算摇杆力度（0-1，推到边缘是1）
+      var intensity = Math.min(dist / this.joystickRadius, 1);
+      this.joystickIntensity = intensity;
+
+      // 设置方向键（死区，力度小于0.2不触发）
       var deadzone = 10;
       var keys = garden.keys;
       if(!keys) return;
 
-      keys['w'] = dy < -deadzone;
-      keys['s'] = dy > deadzone;
-      keys['a'] = dx < -deadzone;
-      keys['d'] = dx > deadzone;
+      // 八方向支持，根据dx和dy的比例决定方向
+      var absDx = Math.abs(dx);
+      var absDy = Math.abs(dy);
+      var threshold = deadzone;
+
+      keys['w'] = dy < -threshold;
+      keys['s'] = dy > threshold;
+      keys['a'] = dx < -threshold;
+      keys['d'] = dx > threshold;
     }catch(e){ console.warn('updateJoystick error:', e); }
   },
 
