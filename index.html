@@ -909,13 +909,35 @@ body{margin:0;padding:0}
   }
   .mobile-menu-btn:active{background:rgba(200,163,82,.2)}
 
-  /* 快捷栏 - 缩小尺寸 */
-  .stardew-hotbar{bottom:8px;padding:4px 5px;gap:3px}
-  .hotbar-slot{width:38px;height:38px;font-size:18px;border-radius:5px}
-  .hotbar-slot .slot-count{font-size:10px;bottom:1px;right:2px}
-  .hotbar-slot .slot-key{font-size:9px;display:none}
-  .hotbar-bag-btn{width:38px;height:38px;font-size:18px;border-radius:5px;margin-left:3px}
-  .hotbar-task-btn{width:38px;height:38px;font-size:18px;border-radius:5px;margin-left:3px}
+  /* 快捷栏 - 上移避开摇杆，缩小尺寸 */
+  .stardew-hotbar{bottom:150px;padding:3px 4px;gap:2px}
+  .hotbar-slot{width:34px;height:34px;font-size:16px;border-radius:4px}
+  .hotbar-slot .slot-count{font-size:9px;bottom:0;right:2px}
+  .hotbar-slot .slot-key{display:none}
+  .hotbar-bag-btn{width:34px;height:34px;font-size:16px;border-radius:4px;margin-left:2px}
+  .hotbar-task-btn{width:34px;height:34px;font-size:16px;border-radius:4px;margin-left:2px}
+
+  /* NPC名字浮层 - 走近时显示在屏幕上方中央 */
+  .npc-name-float{
+    position:absolute;top:60px;left:50%;transform:translateX(-50%);
+    background:rgba(20,12,8,.92);
+    border:2px solid var(--accent);
+    border-radius:20px;
+    padding:8px 20px;
+    color:var(--surface);
+    font-size:15px;
+    z-index:8;
+    display:none;
+    text-align:center;
+    white-space:nowrap;
+    box-shadow:0 2px 15px rgba(0,0,0,.5);
+    font-family:"STKaiti","KaiTi",serif;
+  }
+  .npc-name-float.show{display:block;animation:nameFloatIn .3s ease}
+  .npc-name-float .float-name{color:var(--accent);font-size:17px;font-weight:bold}
+  .npc-name-float .float-sub{font-size:12px;color:var(--muted);margin-top:2px}
+  .npc-name-float .float-hearts{font-size:13px;margin-top:2px;color:#e74c3c}
+  @keyframes nameFloatIn{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 
   /* 小地图 - 默认收起为图标 */
   .minimap{
@@ -948,12 +970,12 @@ body{margin:0;padding:0}
   .garden-canvas-wrap{width:100%;flex:1;min-height:0}
   #garden-canvas{max-width:100%;max-height:100%;object-fit:contain}
 
-  /* 互动提示 */
-  .interaction-prompt{bottom:90px;padding:6px 14px;font-size:12px}
+  /* 互动提示 - 上移避开摇杆 */
+  .interaction-prompt{bottom:210px;padding:6px 14px;font-size:12px}
   .interaction-prompt kbd{padding:2px 6px;font-size:11px}
 
-  /* 物品获取提示 */
-  .item-gain-toast{bottom:70px;right:10px}
+  /* 物品获取提示 - 上移避开摇杆 */
+  .item-gain-toast{bottom:200px;right:10px}
   .item-gain-item{padding:5px 10px;font-size:12px}
 
   /* 弹窗响应式 */
@@ -971,16 +993,19 @@ body{margin:0;padding:0}
   .task-actions{gap:8px}
   .task-actions button{min-height:44px;padding:8px 16px;font-size:14px}
 
-  /* 对话弹窗 */
+  /* 对话弹窗 - 上移避开摇杆和快捷栏 */
   .dialogue-overlay{
     max-width:90%;width:90%;padding:10px 12px;gap:10px;
-    bottom:70px;left:5%;right:5%;
+    bottom:200px;left:5%;right:5%;
+    max-height:50vh;overflow-y:auto;
   }
-  .dialogue-portrait{width:48px;height:48px;flex-shrink:0}
-  .dialogue-portrait canvas{width:48px;height:48px}
+  .dialogue-portrait{width:44px;height:44px;flex-shrink:0}
+  .dialogue-portrait canvas{width:44px;height:44px}
   .dialogue-name{font-size:14px}
   .dialogue-text{font-size:13px;line-height:1.5}
   .dialogue-options button{min-height:40px;font-size:13px;padding:8px 12px}
+  .dialogue-options{flex-direction:column;gap:6px}
+  .dialogue-options button{width:100%}
 
   /* 任务日志弹窗 */
   .quest-log-panel{
@@ -1096,20 +1121,22 @@ body{margin:0;padding:0}
 
 /* === 手机横屏模式 === */
 @media(max-width:768px) and (orientation:landscape){
-  .virtual-joystick{bottom:60px;left:15px;width:100px;height:100px}
+  .virtual-joystick{bottom:20px;left:15px;width:100px;height:100px}
   .joystick-knob{width:42px;height:42px;margin:-21px 0 0 -21px}
-  .mobile-action-btn{bottom:60px;right:15px;width:54px;height:54px;font-size:24px}
+  .mobile-action-btn{bottom:30px;right:15px;width:54px;height:54px;font-size:24px}
   .stardew-top-bar{height:32px}
-  .stardew-hotbar{bottom:5px}
-  .hotbar-slot{width:34px;height:34px;font-size:16px}
-  .hotbar-bag-btn{width:34px;height:34px;font-size:16px}
-  .hotbar-task-btn{width:34px;height:34px;font-size:16px}
-  .mobile-menu-btn{top:40px}
-  .minimap{top:40px}
-  .mobile-quick-btns{top:40px}
-  .dialogue-overlay{bottom:55px}
-  .interaction-prompt{bottom:75px}
-  .item-gain-toast{bottom:55px}
+  .stardew-hotbar{bottom:20px;right:80px;left:auto;transform:none}
+  .hotbar-slot{width:32px;height:32px;font-size:15px}
+  .hotbar-bag-btn{width:32px;height:32px;font-size:15px}
+  .hotbar-task-btn{width:32px;height:32px;font-size:15px}
+  .mobile-menu-btn{top:36px}
+  .minimap{top:36px}
+  .mobile-quick-btns{top:36px}
+  .dialogue-overlay{bottom:10px}
+  .interaction-prompt{bottom:50px}
+  .item-gain-toast{bottom:10px}
+  .npc-name-float{top:42px;font-size:13px;padding:5px 15px}
+  .npc-name-float .float-name{font-size:15px}
 }
 
 /* === Hub Character Showcase === */
@@ -2149,6 +2176,12 @@ body{margin:0;padding:0}
       </div>
       <!-- Interaction Prompt -->
       <div class="interaction-prompt" id="interaction-prompt">按 <kbd>E</kbd> 或点击互动</div>
+      <!-- NPC名字浮层（走近时显示） -->
+      <div class="npc-name-float" id="npc-name-float">
+        <div class="float-name" id="float-npc-name"></div>
+        <div class="float-sub" id="float-npc-sub"></div>
+        <div class="float-hearts" id="float-npc-hearts"></div>
+      </div>
       <!-- Item Gain Toast Container -->
       <div class="item-gain-toast" id="item-gain-toast"></div>
       <!-- Stardew-style Hotbar -->
@@ -2171,6 +2204,7 @@ body{margin:0;padding:0}
         <button class="mobile-quick-btn" onclick="questLogSystem.toggle()" title="任务">📋</button>
         <button class="mobile-quick-btn" onclick="hotbarSystem.openInventory()" title="背包">🎒</button>
         <button class="mobile-quick-btn" onclick="mobileUI.toggleSidebar()" title="菜单">☰</button>
+        <button class="mobile-quick-btn" onclick="mobileUI.toggleRotation()" title="横屏">⤧</button>
       </div>
       <!-- 虚拟摇杆 -->
       <div class="virtual-joystick" id="virtual-joystick">
@@ -16044,6 +16078,49 @@ var interactionSystem={
   nearbyNPC:null,
   nearbyBuilding:null,
   
+  updateNPCFloatName:function(npc){
+    try{
+      var floatEl=document.getElementById('npc-name-float');
+      var nameEl=document.getElementById('float-npc-name');
+      var subEl=document.getElementById('float-npc-sub');
+      var heartsEl=document.getElementById('float-npc-hearts');
+      if(!floatEl||!nameEl)return;
+      
+      nameEl.textContent=npc.name;
+      if(subEl){
+        var role=npc.role||'';
+        var action='';
+        if(npc.aiState&&npc.aiState.mode==='idle'&&npc.aiState.actionType){
+          action='正在'+npc.aiState.actionType;
+        }else if(npc.aiState&&npc.aiState.mode==='walking'){
+          action='在园中漫步';
+        }
+        subEl.textContent=role+(action?' · '+action:'');
+      }
+      // 好感度
+      if(heartsEl&&typeof affectionSystem!=='undefined'){
+        var aff=affectionSystem.getAffection(npc.name);
+        var level=affectionSystem.getLevel(aff);
+        var fullHearts=Math.floor(aff/20);
+        var heartStr='';
+        for(var h=0;h<5;h++){
+          heartStr+=h<fullHearts?'❤':'♡';
+        }
+        heartsEl.textContent=heartStr+' '+level;
+      }else if(heartsEl){
+        heartsEl.textContent='';
+      }
+      floatEl.classList.add('show');
+    }catch(e){console.warn('updateNPCFloatName error:',e);}
+  },
+  
+  hideNPCFloatName:function(){
+    try{
+      var floatEl=document.getElementById('npc-name-float');
+      if(floatEl) floatEl.classList.remove('show');
+    }catch(e){}
+  },
+  
   update:function(){
     try{
       var gardenObj=window.garden;
@@ -16054,6 +16131,8 @@ var interactionSystem={
       var px=gardenObj.player.x,py=gardenObj.player.y;
       var found=false;
       var promptText='';
+      var nearestNPC=null;
+      var nearestDist=9999;
       
       // 检测附近NPC（范围80，与tryInteract一致）
       for(var i=0;i<gardenObj.characters.length;i++){
@@ -16062,8 +16141,17 @@ var interactionSystem={
         if(dist<80){
           found=true;
           promptText='按 <kbd>E</kbd> 与 '+npc.name+' 交谈';
-          break;
+          if(dist<nearestDist){nearestDist=dist;nearestNPC=npc;}
         }
+      }
+      
+      // 更新NPC名字浮层
+      if(nearestNPC){
+        this.nearbyNPC=nearestNPC;
+        this.updateNPCFloatName(nearestNPC);
+      }else{
+        this.nearbyNPC=null;
+        this.hideNPCFloatName();
       }
       
       // 检测附近建筑（范围120，与tryInteract一致）
@@ -16599,6 +16687,46 @@ var mobileUI = {
         document.dispatchEvent(event);
       }
     }catch(e){ console.warn('interact error:', e); }
+  },
+
+  // 横屏/竖屏切换
+  toggleRotation: function(){
+    try{
+      var body = document.body;
+      if(body.classList.contains('force-landscape')){
+        body.classList.remove('force-landscape');
+        // 恢复正常
+        document.documentElement.style.transform = '';
+        document.documentElement.style.width = '';
+        document.documentElement.style.height = '';
+        document.documentElement.style.transformOrigin = '';
+      }else{
+        // 强制横屏（CSS旋转）
+        body.classList.add('force-landscape');
+        this.applyLandscapeTransform();
+      }
+      setTimeout(function(){ fixVH(); mobileUI.onResize(); }, 100);
+      setTimeout(function(){ fixVH(); mobileUI.onResize(); }, 500);
+    }catch(e){ console.warn('toggleRotation error:', e); }
+  },
+
+  applyLandscapeTransform: function(){
+    try{
+      var body = document.body;
+      if(!body.classList.contains('force-landscape')) return;
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      // 如果已经是横屏，不用转
+      if(w > h) return;
+      var html = document.documentElement;
+      html.style.transform = 'rotate(90deg)';
+      html.style.transformOrigin = 'center center';
+      html.style.width = h + 'px';
+      html.style.height = w + 'px';
+      html.style.position = 'fixed';
+      html.style.top = ((h - w) / 2) + 'px';
+      html.style.left = -((h - w) / 2) + 'px';
+    }catch(e){}
   },
 
   updateActionButton: function(){
