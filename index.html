@@ -888,7 +888,7 @@ body{margin:0;padding:0}
   .garden-sidebar{
     position:fixed;top:0;right:0;bottom:0;width:80%;max-width:300px;
     z-index:90;transform:translateX(100%);transition:transform .3s ease;
-    overflow-y:auto;padding:15px;
+    overflow-y:auto;padding:15px 15px 30px;
     box-shadow:-4px 0 20px rgba(0,0,0,.5);
   }
   .garden-sidebar.mobile-open{transform:translateX(0)}
@@ -909,37 +909,54 @@ body{margin:0;padding:0}
   }
   .mobile-menu-btn:active{background:rgba(200,163,82,.2)}
 
-  /* 快捷栏 - 上移避开摇杆，缩小尺寸 */
-  .stardew-hotbar{bottom:150px;padding:3px 4px;gap:2px}
-  .hotbar-slot{width:34px;height:34px;font-size:16px;border-radius:4px}
+  /* 快捷栏 - 上移避开摇杆，缩小 */
+  .stardew-hotbar{bottom:115px;padding:3px 4px;gap:2px}
+  .hotbar-slot{width:32px;height:32px;font-size:15px;border-radius:4px}
   .hotbar-slot .slot-count{font-size:9px;bottom:0;right:2px}
   .hotbar-slot .slot-key{display:none}
-  .hotbar-bag-btn{width:34px;height:34px;font-size:16px;border-radius:4px;margin-left:2px}
-  .hotbar-task-btn{width:34px;height:34px;font-size:16px;border-radius:4px;margin-left:2px}
+  .hotbar-bag-btn{width:32px;height:32px;font-size:15px;border-radius:4px;margin-left:2px}
+  .hotbar-task-btn{width:32px;height:32px;font-size:15px;border-radius:4px;margin-left:2px}
+
+  /* 移动端快捷按钮组 - 缩小 */
+  .mobile-quick-btns{
+    position:absolute;top:45px;left:8px;z-index:9;
+    display:none;flex-direction:column;gap:5px;
+  }
+  .mobile-quick-btns.show{display:flex}
+  .mobile-quick-btn{
+    width:34px;height:34px;border-radius:6px;
+    background:rgba(30,18,10,.85);
+    border:2px solid var(--accent);
+    color:var(--accent);font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:inherit;cursor:pointer;
+    backdrop-filter:blur(4px);
+    transition:all .15s ease;
+  }
+  .mobile-quick-btn:active{background:rgba(200,163,82,.2)}
 
   /* NPC名字浮层 - 走近时显示在屏幕上方中央 */
   .npc-name-float{
-    position:absolute;top:60px;left:50%;transform:translateX(-50%);
+    position:absolute;top:55px;left:50%;transform:translateX(-50%);
     background:rgba(20,12,8,.92);
     border:2px solid var(--accent);
-    border-radius:20px;
-    padding:8px 20px;
+    border-radius:16px;
+    padding:6px 16px;
     color:var(--surface);
-    font-size:15px;
+    font-size:13px;
     z-index:8;
     display:none;
     text-align:center;
     white-space:nowrap;
-    box-shadow:0 2px 15px rgba(0,0,0,.5);
+    box-shadow:0 2px 12px rgba(0,0,0,.5);
     font-family:"STKaiti","KaiTi",serif;
   }
   .npc-name-float.show{display:block;animation:nameFloatIn .3s ease}
-  .npc-name-float .float-name{color:var(--accent);font-size:17px;font-weight:bold}
-  .npc-name-float .float-sub{font-size:12px;color:var(--muted);margin-top:2px}
-  .npc-name-float .float-hearts{font-size:13px;margin-top:2px;color:#e74c3c}
+  .npc-name-float .float-name{color:var(--accent);font-size:15px;font-weight:bold}
+  .npc-name-float .float-sub{font-size:11px;color:var(--muted);margin-top:1px}
+  .npc-name-float .float-hearts{font-size:12px;margin-top:1px;color:#e74c3c}
   @keyframes nameFloatIn{from{opacity:0;transform:translateX(-50%) translateY(-10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 
-  /* 小地图 - 默认收起为图标 */
   .minimap{
     width:auto;padding:0;border:none;background:transparent;
     box-shadow:none;top:50px;right:10px;
@@ -971,11 +988,11 @@ body{margin:0;padding:0}
   #garden-canvas{max-width:100%;max-height:100%;object-fit:contain}
 
   /* 互动提示 - 上移避开摇杆 */
-  .interaction-prompt{bottom:210px;padding:6px 14px;font-size:12px}
+  .interaction-prompt{bottom:140px;padding:6px 14px;font-size:12px}
   .interaction-prompt kbd{padding:2px 6px;font-size:11px}
 
   /* 物品获取提示 - 上移避开摇杆 */
-  .item-gain-toast{bottom:200px;right:10px}
+  .item-gain-toast{bottom:130px;right:10px}
   .item-gain-item{padding:5px 10px;font-size:12px}
 
   /* 弹窗响应式 */
@@ -996,7 +1013,7 @@ body{margin:0;padding:0}
   /* 对话弹窗 - 上移避开摇杆和快捷栏 */
   .dialogue-overlay{
     max-width:90%;width:90%;padding:10px 12px;gap:10px;
-    bottom:200px;left:5%;right:5%;
+    bottom:130px;left:5%;right:5%;
     max-height:50vh;overflow-y:auto;
   }
   .dialogue-portrait{width:44px;height:44px;flex-shrink:0}
@@ -1027,11 +1044,12 @@ body{margin:0;padding:0}
   /* 满意度弹窗 */
   .satisfaction-box{max-width:90%!important;width:90%!important;padding:15px!important}
 
-  /* 虚拟摇杆 */
+  /* 虚拟摇杆 - 缩小并下移到底部 */
   .virtual-joystick{
-    position:absolute;bottom:80px;left:20px;z-index:10;
-    width:120px;height:120px;
+    position:absolute;bottom:15px;left:15px;z-index:10;
+    width:90px;height:90px;
     display:none;
+    opacity:.7;
   }
   .virtual-joystick.show{display:block}
   .joystick-base{
@@ -1043,8 +1061,8 @@ body{margin:0;padding:0}
   }
   .joystick-knob{
     position:absolute;top:50%;left:50%;
-    width:50px;height:50px;
-    margin:-25px 0 0 -25px;
+    width:38px;height:38px;
+    margin:-19px 0 0 -19px;
     background:rgba(200,163,82,.6);
     border:2px solid var(--accent);
     border-radius:50%;
@@ -1053,18 +1071,19 @@ body{margin:0;padding:0}
   }
   .joystick-knob.active{background:rgba(200,163,82,.8)}
 
-  /* 移动端互动按钮 */
+  /* 移动端互动按钮 - 缩小并下移 */
   .mobile-action-btn{
-    position:absolute;bottom:80px;right:20px;z-index:10;
-    width:64px;height:64px;border-radius:50%;
+    position:absolute;bottom:25px;right:15px;z-index:10;
+    width:50px;height:50px;border-radius:50%;
     background:rgba(200,163,82,.6);
-    border:3px solid var(--accent);
-    color:#fff;font-size:28px;
+    border:2px solid var(--accent);
+    color:#fff;font-size:22px;
     display:none;align-items:center;justify-content:center;
     font-family:inherit;cursor:pointer;
     backdrop-filter:blur(4px);
-    box-shadow:0 4px 15px rgba(0,0,0,.4);
+    box-shadow:0 2px 10px rgba(0,0,0,.4);
     transition:all .15s ease;
+    opacity:.8;
   }
   .mobile-action-btn.show{display:flex}
   .mobile-action-btn:active{
@@ -1073,7 +1092,7 @@ body{margin:0;padding:0}
   }
   .mobile-action-btn.available{
     animation:actionBtnPulse 1s ease-in-out infinite;
-    box-shadow:0 0 20px rgba(255,215,0,.6);
+    box-shadow:0 0 15px rgba(255,215,0,.6);
   }
   @keyframes actionBtnPulse{
     0%,100%{box-shadow:0 0 15px rgba(255,215,0,.4)}
@@ -1120,23 +1139,71 @@ body{margin:0;padding:0}
 }
 
 /* === 手机横屏模式 === */
-@media(max-width:768px) and (orientation:landscape){
-  .virtual-joystick{bottom:20px;left:15px;width:100px;height:100px}
-  .joystick-knob{width:42px;height:42px;margin:-21px 0 0 -21px}
-  .mobile-action-btn{bottom:30px;right:15px;width:54px;height:54px;font-size:24px}
-  .stardew-top-bar{height:32px}
-  .stardew-hotbar{bottom:20px;right:80px;left:auto;transform:none}
-  .hotbar-slot{width:32px;height:32px;font-size:15px}
-  .hotbar-bag-btn{width:32px;height:32px;font-size:15px}
-  .hotbar-task-btn{width:32px;height:32px;font-size:15px}
-  .mobile-menu-btn{top:36px}
-  .minimap{top:36px}
-  .mobile-quick-btns{top:36px}
-  .dialogue-overlay{bottom:10px}
-  .interaction-prompt{bottom:50px}
-  .item-gain-toast{bottom:10px}
-  .npc-name-float{top:42px;font-size:13px;padding:5px 15px}
-  .npc-name-float .float-name{font-size:15px}
+@media(max-height:500px) and (orientation:landscape){
+  .virtual-joystick{bottom:10px;left:10px;width:80px;height:80px}
+  .joystick-knob{width:34px;height:34px;margin:-17px 0 0 -17px}
+  .mobile-action-btn{bottom:15px;right:15px;width:44px;height:44px;font-size:20px}
+  .stardew-top-bar{height:28px;font-size:11px}
+  .stardew-top-bar .bar-date{font-size:11px}
+  .stardew-top-bar .bar-time-icon{font-size:14px}
+  .stardew-top-bar .bar-time-name{font-size:11px}
+  .stardew-hotbar{bottom:10px;right:70px;left:auto;transform:none}
+  .hotbar-slot{width:28px;height:28px;font-size:13px}
+  .hotbar-bag-btn{width:28px;height:28px;font-size:13px}
+  .hotbar-task-btn{width:28px;height:28px;font-size:13px}
+  .mobile-menu-btn{top:34px;right:10px;width:32px;height:32px;font-size:14px}
+  .minimap{top:34px;right:50px}
+  .minimap::before{width:32px;height:32px;line-height:32px;font-size:18px}
+  .mobile-quick-btns{top:34px;left:10px;gap:4px}
+  .mobile-quick-btn{width:30px;height:30px;font-size:13px}
+  .dialogue-overlay{bottom:5px;padding:8px 10px;max-height:60vh}
+  .dialogue-portrait{width:36px;height:36px}
+  .dialogue-portrait canvas{width:36px;height:36px}
+  .dialogue-name{font-size:12px}
+  .dialogue-text{font-size:12px;line-height:1.4}
+  .dialogue-options button{min-height:32px;font-size:12px;padding:5px 10px}
+  .interaction-prompt{bottom:45px;padding:4px 10px;font-size:11px}
+  .item-gain-toast{bottom:5px;right:5px}
+  .item-gain-item{padding:3px 8px;font-size:11px}
+  .npc-name-float{top:36px;font-size:12px;padding:4px 12px}
+  .npc-name-float .float-name{font-size:13px}
+  .garden-canvas-wrap{height:calc(100vh - 28px)}
+  #garden-canvas{max-height:100%;max-width:100%}
+}
+
+/* === 强制横屏模式（点旋转按钮后） === */
+@media(max-width:768px){
+  body.force-landscape #screen-garden{overflow:hidden}
+  body.force-landscape .garden-layout{height:100vh;height:calc(var(--vh,1vh)*100)}
+  body.force-landscape .stardew-top-bar{height:28px;font-size:11px}
+  body.force-landscape .stardew-top-bar .bar-date{font-size:11px}
+  body.force-landscape .stardew-top-bar .bar-time-icon{font-size:14px}
+  body.force-landscape .stardew-top-bar .bar-time-name{font-size:11px}
+  body.force-landscape .garden-canvas-wrap{height:calc(100vh - 28px);height:calc(var(--vh,1vh)*100 - 28px)}
+  body.force-landscape #garden-canvas{max-height:100%;max-width:100%}
+  body.force-landscape .virtual-joystick{bottom:10px;left:10px;width:80px;height:80px;opacity:.7}
+  body.force-landscape .joystick-knob{width:34px;height:34px;margin:-17px 0 0 -17px}
+  body.force-landscape .mobile-action-btn{bottom:15px;right:15px;width:44px;height:44px;font-size:20px;opacity:.8}
+  body.force-landscape .stardew-hotbar{bottom:10px;right:65px;left:auto;transform:none}
+  body.force-landscape .hotbar-slot{width:28px;height:28px;font-size:13px}
+  body.force-landscape .hotbar-bag-btn{width:28px;height:28px;font-size:13px}
+  body.force-landscape .hotbar-task-btn{width:28px;height:28px;font-size:13px}
+  body.force-landscape .mobile-menu-btn{top:34px;right:10px;width:32px;height:32px;font-size:14px}
+  body.force-landscape .minimap{top:34px;right:50px}
+  body.force-landscape .minimap::before{width:32px;height:32px;line-height:32px;font-size:18px}
+  body.force-landscape .mobile-quick-btns{top:34px;left:10px;gap:4px}
+  body.force-landscape .mobile-quick-btn{width:30px;height:30px;font-size:13px}
+  body.force-landscape .dialogue-overlay{bottom:5px;padding:8px 10px;max-height:60vh}
+  body.force-landscape .dialogue-portrait{width:36px;height:36px}
+  body.force-landscape .dialogue-portrait canvas{width:36px;height:36px}
+  body.force-landscape .dialogue-name{font-size:12px}
+  body.force-landscape .dialogue-text{font-size:12px;line-height:1.4}
+  body.force-landscape .dialogue-options button{min-height:32px;font-size:12px;padding:5px 10px}
+  body.force-landscape .interaction-prompt{bottom:45px;padding:4px 10px;font-size:11px}
+  body.force-landscape .item-gain-toast{bottom:5px;right:5px}
+  body.force-landscape .item-gain-item{padding:3px 8px;font-size:11px}
+  body.force-landscape .npc-name-float{top:36px;font-size:12px;padding:4px 12px}
+  body.force-landscape .npc-name-float .float-name{font-size:13px}
 }
 
 /* === Hub Character Showcase === */
@@ -8205,8 +8272,8 @@ var garden={
         '<div class="surv-sidebar-time">'+(timeText[surv.timePeriod]||'')+'</div>'+
         '<div class="surv-stat-row"><span class="surv-label">体力</span><div class="stat-bar"><div class="stat-fill energy" style="width:'+energyPct+'%"></div></div><span class="surv-val">'+surv.energy+'</span></div>'+
         '<div class="surv-stat-row"><span class="surv-label">人缘</span><div class="stat-bar"><div class="stat-fill reputation" style="width:'+repPct+'%"></div></div><span class="surv-val">'+surv.reputation+'</span></div>'+
-        '<div class="surv-money-row">💰 银两：'+surv.money+' 两</div>'+
-        '<div class="surv-daily-title">📋 今日任务</div>'+dailyHtml+
+        '<div class="surv-money-row">银两：'+Number(surv.money||0).toString()+' 两</div>'+
+        '<div class="surv-daily-title">今日任务</div>'+dailyHtml+
         '<button class="surv-exit-btn" onclick="garden.exitSurvivalMode()">返回大厅</button>';
       // Hide all sections except first (player info)
       for(var s=0;s<sections.length;s++){
@@ -16693,15 +16760,17 @@ var mobileUI = {
   toggleRotation: function(){
     try{
       var body = document.body;
+      var html = document.documentElement;
       if(body.classList.contains('force-landscape')){
         body.classList.remove('force-landscape');
-        // 恢复正常
-        document.documentElement.style.transform = '';
-        document.documentElement.style.width = '';
-        document.documentElement.style.height = '';
-        document.documentElement.style.transformOrigin = '';
+        html.style.transform = '';
+        html.style.transformOrigin = '';
+        html.style.width = '';
+        html.style.height = '';
+        html.style.position = '';
+        html.style.top = '';
+        html.style.left = '';
       }else{
-        // 强制横屏（CSS旋转）
         body.classList.add('force-landscape');
         this.applyLandscapeTransform();
       }
@@ -16726,6 +16795,12 @@ var mobileUI = {
       html.style.position = 'fixed';
       html.style.top = ((h - w) / 2) + 'px';
       html.style.left = -((h - w) / 2) + 'px';
+      // 旋转后更新画布
+      setTimeout(function(){
+        if(mobileUI.isMobile && mobileUI.resizeCanvas){
+          mobileUI.resizeCanvas();
+        }
+      }, 200);
     }catch(e){}
   },
 
@@ -16766,13 +16841,15 @@ var mobileUI = {
       var wrap = document.querySelector('.garden-canvas-wrap');
       if(!canvas || !wrap) return;
 
-      var wrapRect = wrap.getBoundingClientRect();
+      // 用 offsetWidth/offsetHeight，不受 CSS transform 旋转影响
+      var wrapW = wrap.offsetWidth;
+      var wrapH = wrap.offsetHeight;
       var origW = canvas._origWidth || canvas.width;
       var origH = canvas._origHeight || canvas.height;
 
       // 计算缩放比例，保持宽高比
-      var scaleX = wrapRect.width / origW;
-      var scaleY = wrapRect.height / origH;
+      var scaleX = wrapW / origW;
+      var scaleY = wrapH / origH;
       var scale = Math.min(scaleX, scaleY);
 
       // 限制最小缩放
@@ -16788,8 +16865,8 @@ var mobileUI = {
       canvas.style.height = displayH + 'px';
 
       // 计算偏移（居中）
-      this.canvasOffsetX = (wrapRect.width - displayW) / 2;
-      this.canvasOffsetY = (wrapRect.height - displayH) / 2;
+      this.canvasOffsetX = (wrapW - displayW) / 2;
+      this.canvasOffsetY = (wrapH - displayH) / 2;
     }catch(e){ console.warn('resizeCanvas error:', e); }
   },
 
