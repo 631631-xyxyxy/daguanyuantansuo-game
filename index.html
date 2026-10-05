@@ -840,8 +840,8 @@ body{margin:0;padding:0}
   .inventory-modal{max-width:480px}
 }
 
-/* === 响应式适配 - 手机端 (<768px) === */
-@media(max-width:768px){
+/* === 响应式适配 - 手机/平板端 (<=1024px) === */
+@media(max-width:1024px){
   /* 基础调整 */
   .loading-title{font-size:36px;letter-spacing:.15em}
   .loading-subtitle{font-size:14px;letter-spacing:.3em}
@@ -1138,6 +1138,63 @@ body{margin:0;padding:0}
   .chess-cell{width:28px;height:28px}
 }
 
+/* === 平板端微调 (768-1024px) === */
+@media(min-width:768px) and (max-width:1024px){
+  /* 大厅页面 */
+  .hub-title{font-size:42px}
+  .hub-subtitle{font-size:16px}
+  .hub-char-showcase{gap:10px}
+  .hub-features-grid{grid-template-columns:repeat(3,1fr);gap:15px}
+  .feature-card{padding:15px}
+
+  /* 游戏界面 - 平板控件稍大 */
+  .stardew-top-bar{height:48px;font-size:15px}
+  .stardew-top-bar .bar-date{font-size:15px}
+  .stardew-top-bar .bar-time-icon{font-size:20px}
+  .stardew-top-bar .bar-time-name{font-size:14px}
+  .stardew-top-bar .bar-right{gap:12px}
+  .bar-score{font-size:16px;padding:4px 12px}
+  .bar-season{font-size:13px;padding:3px 8px}
+
+  /* 移动端按钮 - 平板上稍大 */
+  .virtual-joystick{bottom:20px;left:25px;width:110px;height:110px;opacity:.7}
+  .joystick-knob{width:46px;height:46px;margin:-23px 0 0 -23px}
+  .mobile-action-btn{bottom:30px;right:25px;width:60px;height:60px;font-size:26px;opacity:.85}
+  .mobile-menu-btn{top:55px;right:15px;width:40px;height:40px;font-size:18px}
+  .mobile-quick-btns{top:55px;left:15px;gap:8px}
+  .mobile-quick-btn{width:38px;height:38px;font-size:17px}
+
+  /* 快捷栏 */
+  .stardew-hotbar{bottom:135px;padding:4px 6px;gap:4px}
+  .hotbar-slot{width:42px;height:42px;font-size:18px;border-radius:6px}
+  .hotbar-slot .slot-count{font-size:11px;bottom:2px;right:4px}
+  .hotbar-bag-btn{width:42px;height:42px;font-size:18px;border-radius:6px}
+  .hotbar-task-btn{width:42px;height:42px;font-size:18px;border-radius:6px}
+
+  /* 小地图 */
+  .minimap{top:55px;right:60px}
+  .minimap::before{width:40px;height:40px;line-height:40px;font-size:22px}
+
+  /* 互动提示 */
+  .interaction-prompt{bottom:170px;padding:8px 18px;font-size:14px}
+  .item-gain-toast{bottom:160px;right:20px}
+  .item-gain-item{padding:6px 12px;font-size:14px}
+
+  /* 对话面板 */
+  .dialogue-overlay{bottom:150px;padding:15px 18px;max-width:80%;left:10%;right:10%}
+  .dialogue-text{font-size:15px;line-height:1.7}
+  .dialogue-name{font-size:17px}
+  .dialogue-portrait{width:56px;height:56px}
+  .dialogue-portrait canvas{width:56px;height:56px}
+  .dialogue-options button{min-height:40px;font-size:14px}
+
+  /* NPC名字浮层 */
+  .npc-name-float{top:60px;font-size:15px;padding:8px 20px}
+  .npc-name-float .float-name{font-size:18px}
+  .npc-name-float .float-sub{font-size:12px}
+  .npc-name-float .float-hearts{font-size:14px}
+}
+
 /* === 手机横屏模式 === */
 @media(max-height:500px) and (orientation:landscape){
   .virtual-joystick{bottom:10px;left:10px;width:80px;height:80px}
@@ -1172,7 +1229,7 @@ body{margin:0;padding:0}
 }
 
 /* === 强制横屏模式（点旋转按钮后） === */
-@media(max-width:768px){
+@media(max-width:1024px){
   body.force-landscape #screen-garden{overflow:hidden}
   body.force-landscape .garden-layout{height:100vh;height:calc(var(--vh,1vh)*100)}
   body.force-landscape .stardew-top-bar{height:28px;font-size:11px}
@@ -16904,12 +16961,12 @@ var mobileUI = {
   },
 
   checkIsMobile: function(){
-    // 严格判断：必须是移动设备UA 或 (触屏+粗指针+小屏)
+    // 判断移动/触屏设备（含平板）：移动设备UA 或 触屏+粗指针 或 小屏
     var uaMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     var touchSupport = 'ontouchstart' in window;
     var coarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
-    var smallScreen = window.innerWidth <= 768;
-    return uaMobile || (touchSupport && coarsePointer && smallScreen);
+    var smallScreen = window.innerWidth <= 1024;
+    return uaMobile || (touchSupport && coarsePointer) || (touchSupport && smallScreen);
   },
 
   resetCanvasSize: function(){
