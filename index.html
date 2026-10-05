@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>红楼梦数字平台 · 大观园</title>
 <style>
 :root{
@@ -14,8 +14,8 @@
   --border:rgba(200,163,82,.3); --shadow:rgba(0,0,0,.4);
   --transition:.3s ease; --radius:8px; --radius-lg:12px;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;overflow:hidden;font-family:"STSong","SimSun","宋体",serif;background:var(--bg);color:var(--surface)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}
+html,body{width:100%;height:100%;overflow:hidden;font-family:"STSong","SimSun","宋体",serif;background:var(--bg);color:var(--surface);touch-action:manipulation}
 .screen{position:fixed;top:0;left:0;width:100%;height:100%;display:none;overflow:auto}
 .screen.active{display:block}
 
@@ -810,11 +810,304 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:"STSong","SimSun","
 .name-input input{width:100%;background:rgba(245,230,211,.1);border:1px solid var(--border);border-radius:6px;padding:10px 14px;color:var(--surface);font-size:15px;font-family:inherit;outline:none}
 .name-input input:focus{border-color:var(--accent)}
 
+/* === 响应式适配 - 平板端 (768px - 1024px) === */
+@media(max-width:1024px){
+  .loading-title{font-size:56px;letter-spacing:.2em}
+  .hub-title{font-size:40px}
+  .hub-cards{max-width:700px}
+  .hub-char-showcase{max-width:700px}
+  .char-card{width:56px}
+  .stardew-top-bar{height:40px;padding:0 10px;font-size:12px}
+  .stardew-top-bar .bar-date{font-size:13px}
+  .stardew-top-bar .bar-season{font-size:12px}
+  .stardew-top-bar .bar-time-icon{font-size:18px}
+  .stardew-top-bar .bar-time-name{font-size:13px}
+  .stardew-top-bar .bar-left{gap:10px}
+  .stardew-top-bar .bar-right{gap:10px}
+  .garden-sidebar{width:200px;padding:10px}
+  .sidebar-title{font-size:14px}
+  .hotbar-slot{width:42px;height:42px;font-size:20px}
+  .hotbar-bag-btn{width:42px;height:42px;font-size:20px}
+  .hotbar-task-btn{width:42px;height:42px;font-size:20px}
+  .minimap{width:150px}
+  .minimap canvas{height:90px}
+  .minimap-location{font-size:11px}
+  .task-modal-content{max-width:600px;padding:20px}
+  .dialogue-overlay{max-width:450px;padding:12px 16px}
+  .quest-log-panel{max-width:450px}
+  .inventory-modal{max-width:480px}
+}
+
+/* === 响应式适配 - 手机端 (<768px) === */
 @media(max-width:768px){
-  .loading-title{font-size:48px}.hub-title{font-size:36px}.hub-cards{grid-template-columns:1fr}
-  .garden-layout{flex-direction:column}.garden-sidebar{width:100%;max-height:200px}
-  .judgment-options{grid-template-columns:1fr}.avatar-grid{grid-template-columns:repeat(2,1fr)}
-  .minimap{display:none}.chess-cell{width:32px;height:32px}
+  /* 基础调整 */
+  .loading-title{font-size:36px;letter-spacing:.15em}
+  .loading-subtitle{font-size:14px;letter-spacing:.3em}
+  .loading-bar{width:250px}
+
+  /* 大厅页面 - 纵向布局 */
+  .hub-header{padding:20px 15px 15px}
+  .hub-title{font-size:28px;letter-spacing:.15em}
+  .hub-subtitle{font-size:12px;letter-spacing:.2em}
+  .hub-score-val{font-size:24px}
+  .hub-score-val::before{font-size:14px}
+  .hub-cards{grid-template-columns:1fr;max-width:90%;padding:0 10px;gap:12px}
+  .hub-card{padding:18px}
+  .hub-card-icon{font-size:28px;margin-bottom:8px}
+  .hub-card-title{font-size:18px}
+  .hub-card-desc{font-size:12px}
+  .hub-shop-btn{max-width:160px;margin:12px auto 20px}
+  .hub-footer{font-size:11px;padding:15px 0}
+
+  /* 角色展示区 - 缩小 */
+  .hub-char-showcase{max-width:95%;padding:10px;gap:4px}
+  .char-card{width:48px;padding:4px 2px}
+  .char-card canvas{width:36px;height:48px}
+  .char-card .char-name{font-size:10px}
+  .char-card .char-role{font-size:8px}
+  .hub-char-hint{font-size:10px;margin:6px auto 0}
+
+  /* 顶栏 - 精简显示 */
+  .stardew-top-bar{height:36px;padding:0 8px;font-size:11px}
+  .stardew-top-bar .bar-left{gap:6px}
+  .stardew-top-bar .bar-date{font-size:12px}
+  .stardew-top-bar .bar-season{font-size:11px}
+  .stardew-top-bar .bar-weather{font-size:12px}
+  .stardew-top-bar .bar-center{gap:4px}
+  .stardew-top-bar .bar-time-icon{font-size:16px}
+  .stardew-top-bar .bar-time-name{font-size:11px}
+  .stardew-top-bar .bar-right{gap:8px}
+  .stardew-top-bar .bar-money::before{font-size:10px}
+  .stardew-top-bar .bar-score::before{font-size:10px}
+  .stardew-top-bar .bar-affection .heart{font-size:12px}
+  .stardew-top-bar .bar-affection{font-size:11px}
+
+  /* 侧边栏 - 默认隐藏 */
+  .garden-sidebar{
+    position:fixed;top:0;right:0;bottom:0;width:80%;max-width:300px;
+    z-index:90;transform:translateX(100%);transition:transform .3s ease;
+    overflow-y:auto;padding:15px;
+    box-shadow:-4px 0 20px rgba(0,0,0,.5);
+  }
+  .garden-sidebar.mobile-open{transform:translateX(0)}
+  .sidebar-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:85;
+    display:none;backdrop-filter:blur(3px);
+  }
+  .sidebar-overlay.show{display:block}
+
+  /* 移动端菜单按钮 */
+  .mobile-menu-btn{
+    position:absolute;top:50px;right:10px;z-index:9;
+    width:40px;height:40px;border-radius:8px;
+    background:rgba(30,18,10,.9);border:2px solid var(--accent);
+    color:var(--accent);font-size:20px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    font-family:inherit;transition:all .2s;
+  }
+  .mobile-menu-btn:active{background:rgba(200,163,82,.2)}
+
+  /* 快捷栏 - 缩小尺寸 */
+  .stardew-hotbar{bottom:8px;padding:4px 5px;gap:3px}
+  .hotbar-slot{width:38px;height:38px;font-size:18px;border-radius:5px}
+  .hotbar-slot .slot-count{font-size:10px;bottom:1px;right:2px}
+  .hotbar-slot .slot-key{font-size:9px;display:none}
+  .hotbar-bag-btn{width:38px;height:38px;font-size:18px;border-radius:5px;margin-left:3px}
+  .hotbar-task-btn{width:38px;height:38px;font-size:18px;border-radius:5px;margin-left:3px}
+
+  /* 小地图 - 默认收起为图标 */
+  .minimap{
+    width:auto;padding:0;border:none;background:transparent;
+    box-shadow:none;top:50px;right:10px;
+  }
+  .minimap canvas{display:none}
+  .minimap-location{display:none}
+  .minimap-hint{display:none}
+  .minimap-label{display:none}
+  .minimap::before{
+    content:'🗺️';font-size:24px;display:block;
+    width:40px;height:40px;line-height:40px;text-align:center;
+    background:rgba(30,18,10,.9);border:2px solid var(--accent);
+    border-radius:8px;
+  }
+  .minimap.expanded{
+    position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:90%;max-width:400px;z-index:100;padding:12px;
+    background:rgba(20,15,10,.95);border:2px solid var(--accent);
+    border-radius:8px;cursor:default;
+  }
+  .minimap.expanded::before{display:none}
+  .minimap.expanded canvas{display:block;height:auto;aspect-ratio:4/3;width:100%;border-radius:6px}
+  .minimap.expanded .minimap-location{display:block;font-size:14px;margin-top:8px}
+  .minimap.expanded .minimap-legend{display:flex}
+
+  /* 花园布局 - 画布占满 */
+  .garden-layout{height:100%;flex-direction:column}
+  .garden-canvas-wrap{width:100%;height:100%}
+  #garden-canvas{max-width:100%;max-height:100%;object-fit:contain}
+
+  /* 互动提示 */
+  .interaction-prompt{bottom:90px;padding:6px 14px;font-size:12px}
+  .interaction-prompt kbd{padding:2px 6px;font-size:11px}
+
+  /* 物品获取提示 */
+  .item-gain-toast{bottom:70px;right:10px}
+  .item-gain-item{padding:5px 10px;font-size:12px}
+
+  /* 弹窗响应式 */
+  .task-modal-content{
+    max-width:90%;width:90%;padding:15px;
+    max-height:85vh;
+  }
+  .task-modal-header h2{font-size:18px}
+  .task-modal-header .npc-tag{font-size:12px}
+  .task-npc-bubble{font-size:13px;padding:10px 12px}
+  .task-scene-header{height:60px;margin:-15px -15px 12px}
+  .task-scene-header .scene-title{font-size:18px}
+  .task-scene-header .scene-decor{font-size:22px;right:12px}
+  .task-instructions{font-size:12px}
+  .task-actions{gap:8px}
+  .task-actions button{min-height:44px;padding:8px 16px;font-size:14px}
+
+  /* 对话弹窗 */
+  .dialogue-overlay{
+    max-width:90%;width:90%;padding:10px 12px;gap:10px;
+    bottom:70px;left:5%;right:5%;
+  }
+  .dialogue-portrait{width:48px;height:48px;flex-shrink:0}
+  .dialogue-portrait canvas{width:48px;height:48px}
+  .dialogue-name{font-size:14px}
+  .dialogue-text{font-size:13px;line-height:1.5}
+  .dialogue-options button{min-height:40px;font-size:13px;padding:8px 12px}
+
+  /* 任务日志弹窗 */
+  .quest-log-panel{
+    max-width:90%;width:90%;padding:15px;
+    max-height:80vh;
+  }
+  .quest-log-header h3{font-size:18px}
+  .quest-log-item{padding:10px;font-size:12px}
+  .quest-log-item .quest-title{font-size:13px}
+  .quest-log-item .quest-desc{font-size:11px}
+
+  /* 背包弹窗 */
+  .inventory-modal{
+    max-width:90%;width:90%;padding:15px;
+    max-height:80vh;
+  }
+  .inventory-modal-header h3{font-size:18px}
+
+  /* 满意度弹窗 */
+  .satisfaction-box{max-width:90%!important;width:90%!important;padding:15px!important}
+
+  /* 虚拟摇杆 */
+  .virtual-joystick{
+    position:absolute;bottom:80px;left:20px;z-index:10;
+    width:120px;height:120px;
+    display:none;
+  }
+  .virtual-joystick.show{display:block}
+  .joystick-base{
+    width:100%;height:100%;
+    background:rgba(0,0,0,.35);
+    border:2px solid rgba(200,163,82,.5);
+    border-radius:50%;
+    backdrop-filter:blur(4px);
+  }
+  .joystick-knob{
+    position:absolute;top:50%;left:50%;
+    width:50px;height:50px;
+    margin:-25px 0 0 -25px;
+    background:rgba(200,163,82,.6);
+    border:2px solid var(--accent);
+    border-radius:50%;
+    transition:transform .05s ease;
+    pointer-events:none;
+  }
+  .joystick-knob.active{background:rgba(200,163,82,.8)}
+
+  /* 移动端互动按钮 */
+  .mobile-action-btn{
+    position:absolute;bottom:80px;right:20px;z-index:10;
+    width:64px;height:64px;border-radius:50%;
+    background:rgba(200,163,82,.6);
+    border:3px solid var(--accent);
+    color:#fff;font-size:28px;
+    display:none;align-items:center;justify-content:center;
+    font-family:inherit;cursor:pointer;
+    backdrop-filter:blur(4px);
+    box-shadow:0 4px 15px rgba(0,0,0,.4);
+    transition:all .15s ease;
+  }
+  .mobile-action-btn.show{display:flex}
+  .mobile-action-btn:active{
+    transform:scale(.92);
+    background:rgba(200,163,82,.8);
+  }
+  .mobile-action-btn.available{
+    animation:actionBtnPulse 1s ease-in-out infinite;
+    box-shadow:0 0 20px rgba(255,215,0,.6);
+  }
+  @keyframes actionBtnPulse{
+    0%,100%{box-shadow:0 0 15px rgba(255,215,0,.4)}
+    50%{box-shadow:0 0 25px rgba(255,215,0,.8)}
+  }
+
+  /* 移动端快捷按钮组 */
+  .mobile-quick-btns{
+    position:absolute;top:50px;left:10px;z-index:9;
+    display:none;flex-direction:column;gap:6px;
+  }
+  .mobile-quick-btns.show{display:flex}
+  .mobile-quick-btn{
+    width:40px;height:40px;border-radius:8px;
+    background:rgba(30,18,10,.85);
+    border:2px solid var(--accent);
+    color:var(--accent);font-size:18px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:inherit;cursor:pointer;
+    backdrop-filter:blur(4px);
+    transition:all .15s ease;
+  }
+  .mobile-quick-btn:active{background:rgba(200,163,82,.2)}
+
+  /* 游戏画布适配 */
+  .garden-canvas-wrap canvas{
+    max-width:100%;max-height:100%;
+    width:auto!important;height:auto!important;
+  }
+
+  /* 隐藏桌面端提示 */
+  .garden-hint{display:none}
+  .garden-controls{display:none}
+
+  /* 头像选择 */
+  .avatar-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .avatar-option{padding:10px 5px}
+
+  /* 判词游戏 */
+  .judgment-options{grid-template-columns:1fr}
+
+  /* 象棋/棋类游戏 */
+  .chess-cell{width:28px;height:28px}
+}
+
+/* === 手机横屏模式 === */
+@media(max-width:768px) and (orientation:landscape){
+  .virtual-joystick{bottom:60px;left:15px;width:100px;height:100px}
+  .joystick-knob{width:42px;height:42px;margin:-21px 0 0 -21px}
+  .mobile-action-btn{bottom:60px;right:15px;width:54px;height:54px;font-size:24px}
+  .stardew-top-bar{height:32px}
+  .stardew-hotbar{bottom:5px}
+  .hotbar-slot{width:34px;height:34px;font-size:16px}
+  .hotbar-bag-btn{width:34px;height:34px;font-size:16px}
+  .hotbar-task-btn{width:34px;height:34px;font-size:16px}
+  .mobile-menu-btn{top:40px}
+  .minimap{top:40px}
+  .mobile-quick-btns{top:40px}
+  .dialogue-overlay{bottom:55px}
+  .interaction-prompt{bottom:75px}
+  .item-gain-toast{bottom:55px}
 }
 
 /* === Hub Character Showcase === */
@@ -1869,6 +2162,23 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:"STSong","SimSun","
         <div class="hotbar-task-btn" onclick="questLogSystem.toggle()" title="任务日志">📋</div>
         <div class="hotbar-bag-btn" onclick="hotbarSystem.openInventory()" title="背包">🎒</div>
       </div>
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="mobileUI.toggleSidebar()" title="菜单">☰</button>
+      <!-- 移动端快捷按钮组 -->
+      <div class="mobile-quick-btns" id="mobile-quick-btns">
+        <button class="mobile-quick-btn" onclick="questLogSystem.toggle()" title="任务">📋</button>
+        <button class="mobile-quick-btn" onclick="hotbarSystem.openInventory()" title="背包">🎒</button>
+        <button class="mobile-quick-btn" onclick="mobileUI.toggleSidebar()" title="菜单">☰</button>
+      </div>
+      <!-- 虚拟摇杆 -->
+      <div class="virtual-joystick" id="virtual-joystick">
+        <div class="joystick-base"></div>
+        <div class="joystick-knob" id="joystick-knob"></div>
+      </div>
+      <!-- 移动端互动按钮 -->
+      <button class="mobile-action-btn" id="mobile-action-btn" onclick="mobileUI.interact()" title="互动">👆</button>
+      <!-- 侧边栏遮罩 -->
+      <div class="sidebar-overlay" id="sidebar-overlay" onclick="mobileUI.closeSidebar()"></div>
       <!-- Quest Log Panel -->
       <div class="quest-log-panel" id="quest-log-panel">
         <div class="quest-log-header">
@@ -16069,6 +16379,400 @@ garden.update=function(){
   }
 };
 
+// ==================== 移动端响应式控制 ====================
+var mobileUI = {
+  isMobile: false,
+  joystickActive: false,
+  joystickTouchId: null,
+  joystickCenter: {x: 0, y: 0},
+  joystickRadius: 45,
+  canvasScale: 1,
+  canvasOffsetX: 0,
+  canvasOffsetY: 0,
+
+  init: function(){
+    try{
+      var self = this;
+      // 检测移动设备（严格判断）
+      this.isMobile = this.checkIsMobile();
+
+      if(this.isMobile){
+        this.setupMobileUI();
+        this.setupJoystick();
+        this.setupCanvasResize();
+        this.setupTouchInteraction();
+      }else{
+        // 桌面端：确保画布不被缩放
+        this.resetCanvasSize();
+      }
+      // 监听窗口大小变化
+      window.addEventListener('resize', function(){
+        try{ self.onResize(); }catch(e){ console.warn('Resize error:', e); }
+      });
+      // 初始调整（延迟确保DOM就绪）
+      setTimeout(function(){ try{ self.onResize(); }catch(e){} }, 500);
+      setTimeout(function(){ try{ self.onResize(); }catch(e){} }, 1500);
+    }catch(e){ console.error('mobileUI init error:', e); }
+  },
+
+  setupMobileUI: function(){
+    try{
+      var joystick = document.getElementById('virtual-joystick');
+      var actionBtn = document.getElementById('mobile-action-btn');
+      var quickBtns = document.getElementById('mobile-quick-btns');
+      if(joystick) joystick.classList.add('show');
+      if(actionBtn) actionBtn.classList.add('show');
+      if(quickBtns) quickBtns.classList.add('show');
+    }catch(e){ console.warn('setupMobileUI error:', e); }
+  },
+
+  toggleSidebar: function(){
+    try{
+      var sidebar = document.querySelector('.garden-sidebar');
+      var overlay = document.getElementById('sidebar-overlay');
+      if(!sidebar) return;
+      if(sidebar.classList.contains('mobile-open')){
+        this.closeSidebar();
+      }else{
+        sidebar.classList.add('mobile-open');
+        if(overlay) overlay.classList.add('show');
+      }
+    }catch(e){ console.warn('toggleSidebar error:', e); }
+  },
+
+  closeSidebar: function(){
+    try{
+      var sidebar = document.querySelector('.garden-sidebar');
+      var overlay = document.getElementById('sidebar-overlay');
+      if(sidebar) sidebar.classList.remove('mobile-open');
+      if(overlay) overlay.classList.remove('show');
+    }catch(e){ console.warn('closeSidebar error:', e); }
+  },
+
+  setupJoystick: function(){
+    try{
+      var self = this;
+      var joystickEl = document.getElementById('virtual-joystick');
+      var knobEl = document.getElementById('joystick-knob');
+      if(!joystickEl || !knobEl) return;
+
+      var handleStart = function(touch, rect){
+        try{
+          self.joystickActive = true;
+          self.joystickTouchId = touch.identifier;
+          var cx = rect.left + rect.width / 2;
+          var cy = rect.top + rect.height / 2;
+          self.joystickCenter = {x: cx, y: cy};
+          knobEl.classList.add('active');
+          self.updateJoystick(touch.clientX, touch.clientY);
+        }catch(e){ console.warn('joystick start error:', e); }
+      };
+
+      var handleMove = function(touch){
+        try{
+          if(!self.joystickActive || touch.identifier !== self.joystickTouchId) return;
+          self.updateJoystick(touch.clientX, touch.clientY);
+        }catch(e){ console.warn('joystick move error:', e); }
+      };
+
+      var handleEnd = function(touch){
+        try{
+          if(!self.joystickActive || touch.identifier !== self.joystickTouchId) return;
+          self.joystickActive = false;
+          self.joystickTouchId = null;
+          knobEl.classList.remove('active');
+          knobEl.style.transform = 'translate(0, 0)';
+          // 清除所有方向键
+          if(typeof garden !== 'undefined' && garden.keys){
+            garden.keys['w'] = false;
+            garden.keys['s'] = false;
+            garden.keys['a'] = false;
+            garden.keys['d'] = false;
+          }
+        }catch(e){ console.warn('joystick end error:', e); }
+      };
+
+      joystickEl.addEventListener('touchstart', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var rect = joystickEl.getBoundingClientRect();
+        handleStart(e.touches[0], rect);
+      }, {passive: false});
+
+      document.addEventListener('touchmove', function(e){
+        try{
+          if(!self.joystickActive) return;
+          for(var i = 0; i < e.touches.length; i++){
+            if(e.touches[i].identifier === self.joystickTouchId){
+              handleMove(e.touches[i]);
+              e.preventDefault();
+              break;
+            }
+          }
+        }catch(err){}
+      }, {passive: false});
+
+      document.addEventListener('touchend', function(e){
+        try{
+          if(!self.joystickActive) return;
+          for(var i = 0; i < e.changedTouches.length; i++){
+            if(e.changedTouches[i].identifier === self.joystickTouchId){
+              handleEnd(e.changedTouches[i]);
+              break;
+            }
+          }
+        }catch(err){}
+      });
+
+      document.addEventListener('touchcancel', function(e){
+        try{
+          if(!self.joystickActive) return;
+          for(var i = 0; i < e.changedTouches.length; i++){
+            if(e.changedTouches[i].identifier === self.joystickTouchId){
+              handleEnd(e.changedTouches[i]);
+              break;
+            }
+          }
+        }catch(err){}
+      });
+    }catch(e){ console.error('setupJoystick error:', e); }
+  },
+
+  updateJoystick: function(clientX, clientY){
+    try{
+      var knobEl = document.getElementById('joystick-knob');
+      if(!knobEl || typeof garden === 'undefined') return;
+
+      var dx = clientX - this.joystickCenter.x;
+      var dy = clientY - this.joystickCenter.y;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+
+      // 限制摇杆移动范围
+      if(dist > this.joystickRadius){
+        dx = (dx / dist) * this.joystickRadius;
+        dy = (dy / dist) * this.joystickRadius;
+      }
+
+      knobEl.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
+
+      // 设置方向键（死区）
+      var deadzone = 10;
+      var keys = garden.keys;
+      if(!keys) return;
+
+      keys['w'] = dy < -deadzone;
+      keys['s'] = dy > deadzone;
+      keys['a'] = dx < -deadzone;
+      keys['d'] = dx > deadzone;
+    }catch(e){ console.warn('updateJoystick error:', e); }
+  },
+
+  interact: function(){
+    try{
+      if(typeof garden === 'undefined') return;
+      // 触发E键交互逻辑
+      if(garden.checkInteraction && typeof garden.checkInteraction === 'function'){
+        garden.checkInteraction();
+      }else{
+        // 备用：模拟E键按下
+        var event = new Event('keydown');
+        event.key = 'e';
+        document.dispatchEvent(event);
+      }
+    }catch(e){ console.warn('interact error:', e); }
+  },
+
+  updateActionButton: function(){
+    try{
+      var btn = document.getElementById('mobile-action-btn');
+      if(!btn || typeof garden === 'undefined') return;
+      // 检查附近是否有可交互对象
+      var prompt = document.getElementById('interaction-prompt');
+      if(prompt && prompt.classList.contains('show')){
+        btn.classList.add('available');
+      }else{
+        btn.classList.remove('available');
+      }
+    }catch(e){}
+  },
+
+  setupCanvasResize: function(){
+    try{
+      var self = this;
+      var canvas = document.getElementById('garden-canvas');
+      var wrap = document.querySelector('.garden-canvas-wrap');
+      if(!canvas || !wrap) return;
+
+      // 保存原始尺寸
+      if(!canvas._origWidth){
+        canvas._origWidth = canvas.width;
+        canvas._origHeight = canvas.height;
+      }
+
+      this.resizeCanvas();
+    }catch(e){ console.warn('setupCanvasResize error:', e); }
+  },
+
+  resizeCanvas: function(){
+    try{
+      var canvas = document.getElementById('garden-canvas');
+      var wrap = document.querySelector('.garden-canvas-wrap');
+      if(!canvas || !wrap) return;
+
+      var wrapRect = wrap.getBoundingClientRect();
+      var origW = canvas._origWidth || canvas.width;
+      var origH = canvas._origHeight || canvas.height;
+
+      // 计算缩放比例，保持宽高比
+      var scaleX = wrapRect.width / origW;
+      var scaleY = wrapRect.height / origH;
+      var scale = Math.min(scaleX, scaleY);
+
+      // 限制最小缩放
+      if(scale < 0.3) scale = 0.3;
+
+      this.canvasScale = scale;
+
+      // 设置显示尺寸
+      var displayW = Math.floor(origW * scale);
+      var displayH = Math.floor(origH * scale);
+
+      canvas.style.width = displayW + 'px';
+      canvas.style.height = displayH + 'px';
+
+      // 计算偏移（居中）
+      this.canvasOffsetX = (wrapRect.width - displayW) / 2;
+      this.canvasOffsetY = (wrapRect.height - displayH) / 2;
+    }catch(e){ console.warn('resizeCanvas error:', e); }
+  },
+
+  setupTouchInteraction: function(){
+    try{
+      var self = this;
+      var canvas = document.getElementById('garden-canvas');
+      if(!canvas) return;
+
+      // 阻止画布上的默认触摸行为
+      canvas.addEventListener('touchstart', function(e){
+        try{
+          e.preventDefault();
+          if(e.touches.length === 1){
+            var touch = e.touches[0];
+            var rect = canvas.getBoundingClientRect();
+            var x = (touch.clientX - rect.left) / self.canvasScale;
+            var y = (touch.clientY - rect.top) / self.canvasScale;
+            // 触发点击移动（和鼠标点击共用逻辑）
+            if(typeof garden !== 'undefined' && garden.handleCanvasClick){
+              garden.handleCanvasClick(x, y);
+            }
+          }
+        }catch(err){ console.warn('touchstart error:', err); }
+      }, {passive: false});
+
+      canvas.addEventListener('touchmove', function(e){
+        e.preventDefault();
+      }, {passive: false});
+
+      canvas.addEventListener('touchend', function(e){
+        e.preventDefault();
+      }, {passive: false});
+    }catch(e){ console.warn('setupTouchInteraction error:', e); }
+  },
+
+  checkIsMobile: function(){
+    // 严格判断：必须是移动设备UA 或 (触屏+粗指针+小屏)
+    var uaMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    var touchSupport = 'ontouchstart' in window;
+    var coarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    var smallScreen = window.innerWidth <= 768;
+    return uaMobile || (touchSupport && coarsePointer && smallScreen);
+  },
+
+  resetCanvasSize: function(){
+    try{
+      var canvas = document.getElementById('garden-canvas');
+      if(canvas){
+        canvas.style.width = '';
+        canvas.style.height = '';
+        canvas.style.maxWidth = '100%';
+        canvas.style.maxHeight = '100%';
+      }
+      this.canvasScale = 1;
+      this.canvasOffsetX = 0;
+      this.canvasOffsetY = 0;
+    }catch(e){ console.warn('resetCanvasSize error:', e); }
+  },
+
+  onResize: function(){
+    try{
+      // 更新设备检测
+      var wasMobile = this.isMobile;
+      this.isMobile = this.checkIsMobile();
+
+      if(this.isMobile){
+        // 移动端：缩放画布适配屏幕
+        var c = document.getElementById('garden-canvas');
+        if(c && !c._origWidth){
+          this.setupCanvasResize();
+        }
+        this.resizeCanvas();
+      }else{
+        // 桌面端：恢复原始尺寸，由CSS控制
+        this.resetCanvasSize();
+      }
+
+      if(this.isMobile !== wasMobile){
+        if(this.isMobile){
+          this.setupMobileUI();
+          this.setupJoystick();
+          this.setupCanvasResize();
+          this.setupTouchInteraction();
+          this.resizeCanvas();
+        }else{
+          var joystick = document.getElementById('virtual-joystick');
+          var actionBtn = document.getElementById('mobile-action-btn');
+          var quickBtns = document.getElementById('mobile-quick-btns');
+          var menuBtn = document.getElementById('mobile-menu-btn');
+          if(joystick) joystick.classList.remove('show');
+          if(actionBtn) actionBtn.classList.remove('show');
+          if(quickBtns) quickBtns.classList.remove('show');
+          if(menuBtn) menuBtn.style.display = 'none';
+          // 恢复侧边栏
+          var sidebar = document.querySelector('.garden-sidebar');
+          var overlay = document.getElementById('sidebar-overlay');
+          if(sidebar) sidebar.classList.remove('mobile-open');
+          if(overlay) overlay.classList.remove('show');
+          // 恢复画布尺寸
+          this.resetCanvasSize();
+        }
+      }
+    }catch(e){ console.warn('onResize error:', e); }
+  }
+};
+
+// 劫持garden的checkInteraction来更新互动按钮状态
+(function(){
+  try{
+    var origUpdate = null;
+    var checkInterval = setInterval(function(){
+      try{
+        if(typeof garden !== 'undefined' && garden.update){
+          if(!origUpdate){
+            origUpdate = garden.update.bind(garden);
+            garden.update = function(){
+              try{
+                origUpdate();
+                mobileUI.updateActionButton();
+              }catch(e){ console.error('hijacked update error:', e); }
+            };
+          }
+          clearInterval(checkInterval);
+        }
+      }catch(e){}
+    }, 500);
+  }catch(e){ console.warn('hijack garden update error:', e); }
+})();
+
 // ==================== INIT ====================
 window.addEventListener('error',function(e){
   console.error('Game Error:',e.message,'at',e.filename+':'+e.lineno);
@@ -16081,6 +16785,8 @@ window.addEventListener('load',function(){
   try{affectionSystem.init();}catch(e){console.error('Affection init error:',e);}
   try{inventorySystem.init();}catch(e){console.error('Inventory init error:',e);}
   try{hotbarSystem.init();}catch(e){console.error('Hotbar init error:',e);}
+  // 初始化移动端响应式UI
+  try{mobileUI.init();}catch(e){console.error('Mobile UI init error:',e);}
 });
 </script>
 </body>
