@@ -1246,6 +1246,30 @@ body{margin:0;padding:0}
 
   /* 象棋/棋类游戏 */
   .chess-cell{width:28px;height:28px}
+
+  /* 未解锁区域提示 - 移到顶部中间黑色区域 */
+  .area-lock-hint{
+    top:5px;left:50%;right:auto;transform:translateX(-50%);
+    text-align:center;font-size:12px;padding:6px 16px;
+    max-width:80%;background:rgba(158,42,42,.95);
+    border-radius:20px;z-index:200;
+  }
+  .area-lock-hint.show{
+    display:block;opacity:1;
+    animation:lockHintSlideDown .4s ease;
+  }
+  @keyframes lockHintSlideDown{
+    from{opacity:0;transform:translateX(-50%) translateY(-10px)}
+    to{opacity:1;transform:translateX(-50%) translateY(0)}
+  }
+
+  /* 左上角元素 - 小地图和快捷按钮横向排列不重合 */
+  .minimap{top:38px;left:6px;z-index:9}
+  .mobile-quick-btns{
+    top:38px;left:44px;z-index:9;
+    flex-direction:row;gap:4px;
+  }
+  .mobile-quick-btn{width:32px;height:32px;font-size:14px}
 }
 
 /* === 平板端微调 (768-1024px) === */
@@ -1384,6 +1408,50 @@ body{margin:0;padding:0}
   body.force-landscape .zoom-controls{right:8px;gap:3px}
   body.force-landscape .zoom-btn{width:28px;height:28px;font-size:16px;border-radius:4px}
   body.force-landscape .zoom-btn.zoom-reset{font-size:9px;height:20px}
+  /* 强制横屏下弹窗层级提高，确保在最上层 */
+  body.force-landscape .inventory-modal{z-index:200}
+  body.force-landscape .quest-log-panel{z-index:200}
+  body.force-landscape .info-panel{z-index:200}
+  body.force-landscape .gift-modal{z-index:200}
+  body.force-landscape .task-modal{z-index:200}
+  /* 强制横屏下area-lock-hint也在顶部中间 */
+  body.force-landscape .area-lock-hint{
+    top:2px;left:50%;right:auto;transform:translateX(-50%);
+    text-align:center;font-size:11px;padding:4px 12px;max-width:70%;z-index:200;
+  }
+}
+
+/* === 平板端横屏/全屏优化 === */
+@media(min-width:768px) and (max-width:1024px){
+  /* 平板端弹窗层级提高 */
+  .inventory-modal{z-index:200}
+  .quest-log-panel{z-index:200}
+  .info-panel{z-index:200}
+  .gift-modal{z-index:200}
+  .task-modal{z-index:200}
+  /* 平板端area-lock-hint也居中 */
+  .area-lock-hint{
+    top:8px;left:50%;right:auto;transform:translateX(-50%);
+    text-align:center;max-width:60%;z-index:200;
+  }
+}
+
+/* === 平板端横屏模式控件加大 === */
+@media(min-width:768px) and (max-width:1024px) and (orientation:landscape){
+  .virtual-joystick{bottom:15px;left:20px;width:95px;height:95px;opacity:.75}
+  .joystick-knob{width:40px;height:40px;margin:-20px 0 0 -20px}
+  .mobile-action-btn{bottom:20px;right:20px;width:52px;height:52px;font-size:22px;opacity:.85}
+  .stardew-hotbar{bottom:20px;right:80px;left:auto;transform:none}
+  .hotbar-slot{width:36px;height:36px;font-size:16px}
+  .hotbar-bag-btn{width:36px;height:36px;font-size:16px}
+  .hotbar-task-btn{width:36px;height:36px;font-size:16px}
+  .minimap{top:52px;left:12px}
+  .minimap::before{width:36px;height:36px;line-height:36px;font-size:20px}
+  .mobile-quick-btns{top:52px;left:52px;flex-direction:row;gap:5px}
+  .mobile-quick-btn{width:36px;height:36px;font-size:16px}
+  /* 弹窗层级 */
+  .inventory-modal{z-index:200}
+  .quest-log-panel{z-index:200}
 }
 
 /* === Hub Character Showcase === */
